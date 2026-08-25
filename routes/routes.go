@@ -44,7 +44,7 @@ func SetupRouter(
 
 func HealthCheck(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"status":  "UP",
+		"status":  true,
 		"message": "Service is running fine",
 	})
 }
