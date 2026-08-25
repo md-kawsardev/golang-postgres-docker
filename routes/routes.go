@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 
 	"golang-postgres-docker/controllers"
@@ -35,5 +37,14 @@ func SetupRouter(
 
 	}
 
+	router.GET("/health", HealthCheck)
+
 	return router
+}
+
+func HealthCheck(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"status":  "UP",
+		"message": "Service is running fine",
+	})
 }

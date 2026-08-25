@@ -7,19 +7,26 @@ services:
     env_file:
       - .env
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   postgres:
     image: postgres:16
     container_name: note-postgres
     environment:
-      POSTGRES_DB: go_learning
+      POSTGRES_DB: note_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mdkawsardev
     ports:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d note_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
 volumes:
   postgres_data:
