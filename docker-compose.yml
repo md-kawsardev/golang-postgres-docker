@@ -1,9 +1,19 @@
 services:
+  app:
+    build: .
+    container_name: golang-postgres-docker
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:16
     container_name: note-postgres
     environment:
-      POSTGRES_DB: note_db
+      POSTGRES_DB: go_learning
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mdkawsardev
     ports:
