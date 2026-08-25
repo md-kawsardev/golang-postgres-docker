@@ -1,0 +1,6 @@
+.env
+*.log
+bin/
+tmp/
+docs
+PROJECT_PROMPT.md
