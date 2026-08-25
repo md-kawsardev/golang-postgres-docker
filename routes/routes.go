@@ -2,6 +2,7 @@ package routes
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 
@@ -44,7 +45,8 @@ func SetupRouter(
 
 func HealthCheck(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"status":  true,
-		"message": "Service is running fine",
+		"status":    true,
+		"message":   "Service is running fine",
+		"timestamp": time.Now().UnixMilli(),
 	})
 }
